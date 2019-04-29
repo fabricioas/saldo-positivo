@@ -1,0 +1,74 @@
+openapi: 3.0.1
+info:
+  title: Serviços de Titulos
+  version: 1.0.0
+tags:
+  - name: Titulos
+    description: Lançamentos de Despesas e Receitas mensal
+paths:
+  '/titulos/liquidacao/{id}':
+    post:
+      tags:
+        - Titulos
+      summary: Serviço para realizar lançamentos de despesas do mes
+      operationId: liquidacaoTitulo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LiquidacaoTitulo'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Titulo'
+        '405':
+          description: Invalid input
+          content: {}
+components:
+  schemas:
+    Titulo:
+      type: object
+      properties:
+        id:
+          type: string
+        descricao:
+          type: string
+        tipo:
+          type: string
+        mes:
+          type: integer
+        ano:
+          type: integer
+        dataVencimento:
+          type: string
+          format: date
+        dataLiquidacao:
+          type: string
+          format: date
+        valorTitulo:
+          type: number
+          format: float
+        valorPago:
+          type: number
+          format: float
+    LiquidacaoTitulo:
+      type: object
+      properties:
+        dataLiquidacao:
+          type: string
+          format: date
+        valorTitulo:
+          type: number
+          format: float
+        valorPago:
+          type: number

@@ -1,42 +1,58 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>br.com.f8</groupId>
-	<artifactId>projeto01</artifactId>
+	<artifactId>saldo-positivo</artifactId>
+	<packaging>pom</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
-
-	<name>projeto01</name>
-	<url>http://maven.apache.org</url>
+	<properties>
+		<java.version>1.7</java.version>
+		<maven.compiler.source>${java.version}</maven.compiler.source>
+		<maven.compiler.target>${java.version}</maven.compiler.target>
+		<springfox-version>2.7.0</springfox-version>
+	</properties>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.5.RELEASE</version>
+		<version>1.5.9.RELEASE</version>
 	</parent>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<java.version>1.8</java.version>
-	</properties>
-	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-	</dependencies>
-
+	<name>saldo-positivo</name>
 	<build>
+		<sourceDirectory>src/main/java</sourceDirectory>
 		<plugins>
 			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
+				<groupId>io.swagger.codegen.v3</groupId>
+				<artifactId>swagger-codegen-maven-plugin</artifactId>
+				<version>3.0.7</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<groupId>br.com.sicredi</groupId>
+							<artifactId>saldo-positivo-api</artifactId>
+							<artifactVersion>0.0.1-SNAPSHOT</artifactVersion>
+							<inputSpec>${project.basedir}/openapi.yaml</inputSpec>
+							<language>spring</language>
+							<output>${project.basedir}/saldo-positivo-api</output>
+							<apiPackage>br.com.saldo.positivo.swagger.api</apiPackage>
+							<modelPackage>br.com.saldo.positivo.swagger.model</modelPackage>
+							<invokerPackage>br.com.saldo.positivo.swagger.main</invokerPackage>
+							<configOptions>
+								<configPackage>br.com.saldo.positivo.swagger.main</configPackage>
+								<interfaceOnly>true</interfaceOnly>
+								<dateLibrary>java8</dateLibrary>
+							</configOptions>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
+	<modules>
+		<module>saldo-positivo-api</module>
+		<module>saldo-positivo-service</module>
+	</modules>
 </project>
