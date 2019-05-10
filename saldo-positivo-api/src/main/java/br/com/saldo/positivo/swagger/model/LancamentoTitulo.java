@@ -1,21 +1,22 @@
 package br.com.saldo.positivo.swagger.model;
 
-import java.util.Objects;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.time.LocalDate;
-import org.springframework.validation.annotation.Validated;
+import java.util.Objects;
+
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+
+import org.springframework.validation.annotation.Validated;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.swagger.annotations.ApiModelProperty;
 
 /**
- * Titulo
+ * LancamentoTitulo
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-04-29T13:55:41.329-03:00[America/Sao_Paulo]")
-public class Titulo   {
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-05-03T19:17:44.581-03:00[America/Sao_Paulo]")
+public class LancamentoTitulo   {
   @JsonProperty("id")
   private String id = null;
 
@@ -43,7 +44,7 @@ public class Titulo   {
   @JsonProperty("valorPago")
   private Float valorPago = null;
 
-  public Titulo id(String id) {
+  public LancamentoTitulo id(String id) {
     this.id = id;
     return this;
   }
@@ -62,7 +63,7 @@ public class Titulo   {
     this.id = id;
   }
 
-  public Titulo descricao(String descricao) {
+  public LancamentoTitulo descricao(String descricao) {
     this.descricao = descricao;
     return this;
   }
@@ -81,7 +82,7 @@ public class Titulo   {
     this.descricao = descricao;
   }
 
-  public Titulo tipo(String tipo) {
+  public LancamentoTitulo tipo(String tipo) {
     this.tipo = tipo;
     return this;
   }
@@ -100,7 +101,7 @@ public class Titulo   {
     this.tipo = tipo;
   }
 
-  public Titulo mes(Integer mes) {
+  public LancamentoTitulo mes(Integer mes) {
     this.mes = mes;
     return this;
   }
@@ -119,7 +120,7 @@ public class Titulo   {
     this.mes = mes;
   }
 
-  public Titulo ano(Integer ano) {
+  public LancamentoTitulo ano(Integer ano) {
     this.ano = ano;
     return this;
   }
@@ -138,7 +139,7 @@ public class Titulo   {
     this.ano = ano;
   }
 
-  public Titulo dataVencimento(LocalDate dataVencimento) {
+  public LancamentoTitulo dataVencimento(LocalDate dataVencimento) {
     this.dataVencimento = dataVencimento;
     return this;
   }
@@ -158,7 +159,7 @@ public class Titulo   {
     this.dataVencimento = dataVencimento;
   }
 
-  public Titulo dataLiquidacao(LocalDate dataLiquidacao) {
+  public LancamentoTitulo dataLiquidacao(LocalDate dataLiquidacao) {
     this.dataLiquidacao = dataLiquidacao;
     return this;
   }
@@ -178,7 +179,7 @@ public class Titulo   {
     this.dataLiquidacao = dataLiquidacao;
   }
 
-  public Titulo valorTitulo(Float valorTitulo) {
+  public LancamentoTitulo valorTitulo(Float valorTitulo) {
     this.valorTitulo = valorTitulo;
     return this;
   }
@@ -197,7 +198,7 @@ public class Titulo   {
     this.valorTitulo = valorTitulo;
   }
 
-  public Titulo valorPago(Float valorPago) {
+  public LancamentoTitulo valorPago(Float valorPago) {
     this.valorPago = valorPago;
     return this;
   }
@@ -225,16 +226,16 @@ public class Titulo   {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Titulo titulo = (Titulo) o;
-    return Objects.equals(this.id, titulo.id) &&
-        Objects.equals(this.descricao, titulo.descricao) &&
-        Objects.equals(this.tipo, titulo.tipo) &&
-        Objects.equals(this.mes, titulo.mes) &&
-        Objects.equals(this.ano, titulo.ano) &&
-        Objects.equals(this.dataVencimento, titulo.dataVencimento) &&
-        Objects.equals(this.dataLiquidacao, titulo.dataLiquidacao) &&
-        Objects.equals(this.valorTitulo, titulo.valorTitulo) &&
-        Objects.equals(this.valorPago, titulo.valorPago);
+    LancamentoTitulo lancamentoTitulo = (LancamentoTitulo) o;
+    return Objects.equals(this.id, lancamentoTitulo.id) &&
+        Objects.equals(this.descricao, lancamentoTitulo.descricao) &&
+        Objects.equals(this.tipo, lancamentoTitulo.tipo) &&
+        Objects.equals(this.mes, lancamentoTitulo.mes) &&
+        Objects.equals(this.ano, lancamentoTitulo.ano) &&
+        Objects.equals(this.dataVencimento, lancamentoTitulo.dataVencimento) &&
+        Objects.equals(this.dataLiquidacao, lancamentoTitulo.dataLiquidacao) &&
+        Objects.equals(this.valorTitulo, lancamentoTitulo.valorTitulo) &&
+        Objects.equals(this.valorPago, lancamentoTitulo.valorPago);
   }
 
   @Override
@@ -245,7 +246,7 @@ public class Titulo   {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Titulo {\n");
+    sb.append("class LancamentoTitulo {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    descricao: ").append(toIndentedString(descricao)).append("\n");

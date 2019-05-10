@@ -6,6 +6,57 @@ tags:
   - name: Titulos
     description: Lançamentos de Despesas e Receitas mensal
 paths:
+  '/titulos/lancamentos/{ano}/{mes}':
+    get:
+      tags:
+        - Titulos
+      summary: Serviço para realizar lançamentos de despesas do mes
+      operationId: lancamentosTitulo
+      parameters:
+        - name: ano
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: mes
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LancamentosMesResponse'
+        '405':
+          description: Invalid input
+          content: {}
+  '/titulos/lancamento/':
+    post:
+      tags:
+        - Titulos
+      summary: Serviço para realizar lançamentos de despesas do mes
+      operationId: lancamentoTitulo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LancamentoTitulo'
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                properties:
+                  id:
+                    type: string
+        '405':
+          description: Invalid input
+          content: {}
   '/titulos/liquidacao/{id}':
     post:
       tags:
@@ -30,13 +81,65 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Titulo'
+                properties:
+                  id:
+                    type: string
         '405':
           description: Invalid input
           content: {}
 components:
   schemas:
-    Titulo:
+    LancamentosMesResponse:
+      type: object
+      properties:
+        nmMes:
+          type: string
+        mes:
+          type: integer
+        ano:
+          type: integer
+        valorDespesa:
+          type: number
+          format: float
+        valorReceita:
+          type: number
+          format: float
+        valorSobra:
+          type: number
+          format: float
+        lancamentos:
+          type: array
+          items:
+            type: object
+            properties:
+              id: 
+                type: string
+              tipeLancamento:
+                type: string
+                enum: 
+                  - RECEITA
+                  - DESPESA
+              nmLancamento:
+                type: string
+              dataVencimento:
+                type: string
+                format: date
+              dataLiquidacao:
+                type: string
+                format: date
+              valorLancamento:
+                type: number
+                format: float
+              valorSaldo:
+                type: number
+                format: float
+              status:
+                type: string
+                enum: 
+                  - PENDENTE
+                  - PAGO
+                  - ATRASADO
+    LancamentoTitulo:
       type: object
       properties:
         id:
