@@ -44,6 +44,7 @@ public class TitulosApiController implements TitulosApi {
         this.request = request;
     }
 
+    @Override
     public ResponseEntity<Object> lancamentoTitulo(@ApiParam(value = "" ,required=true )  @Valid @RequestBody LancamentoTitulo body) {
     	Titulo titulo = tituloBO.createTitulo(body);
     	tituloDAO.insert(titulo);
@@ -51,6 +52,7 @@ public class TitulosApiController implements TitulosApi {
     }
 
 
+    @Override
     public ResponseEntity<LancamentosMesResponse> lancamentosTitulo(@ApiParam(value = "",required=true) @PathVariable("ano") Integer ano,@ApiParam(value = "",required=true) @PathVariable("mes") Integer mes) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
         } else {
@@ -60,6 +62,7 @@ public class TitulosApiController implements TitulosApi {
     }
 
 
+    @Override
     public ResponseEntity<Object> liquidacaoTitulo(@ApiParam(value = "" ,required=true )  @Valid @RequestBody LiquidacaoTitulo body,@ApiParam(value = "",required=true) @PathVariable("id") String id) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
         } else {

@@ -31,7 +31,7 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<groupId>br.com.sicredi</groupId>
+							<groupId>br.com.f8</groupId>
 							<artifactId>saldo-positivo-api</artifactId>
 							<artifactVersion>0.0.1-SNAPSHOT</artifactVersion>
 							<inputSpec>${project.basedir}/openapi.yaml</inputSpec>
