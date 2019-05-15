@@ -5,10 +5,12 @@ import org.springframework.boot.ExitCodeGenerator;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
+@EnableMongoRepositories(basePackages = {"br.com.saldo.positivo.dao"})
 @EnableSwagger2
 @ComponentScan(basePackages = { "br.com.saldo.positivo.main", "br.com.saldo.positivo.api" , 
 		"br.com.saldo.positivo.config","br.com.saldo.positivo.controller",
