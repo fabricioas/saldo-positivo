@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.validation.annotation.Validated;
@@ -16,7 +17,7 @@ import javax.validation.constraints.*;
  * LancamentosMesResponse
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-05-13T12:56:36.475-03:00[America/Sao_Paulo]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-05-15T09:42:07.118-03:00[America/Sao_Paulo]")
 public class LancamentosMesResponse   {
   @JsonProperty("nmMes")
   private String nmMes = null;
@@ -28,13 +29,13 @@ public class LancamentosMesResponse   {
   private Integer ano = null;
 
   @JsonProperty("valorDespesa")
-  private Float valorDespesa = null;
+  private BigDecimal valorDespesa = null;
 
   @JsonProperty("valorReceita")
-  private Float valorReceita = null;
+  private BigDecimal valorReceita = null;
 
   @JsonProperty("valorSobra")
-  private Float valorSobra = null;
+  private BigDecimal valorSobra = null;
 
   @JsonProperty("lancamentos")
   @Valid
@@ -97,7 +98,7 @@ public class LancamentosMesResponse   {
     this.ano = ano;
   }
 
-  public LancamentosMesResponse valorDespesa(Float valorDespesa) {
+  public LancamentosMesResponse valorDespesa(BigDecimal valorDespesa) {
     this.valorDespesa = valorDespesa;
     return this;
   }
@@ -108,15 +109,16 @@ public class LancamentosMesResponse   {
   **/
   @ApiModelProperty(value = "")
 
-  public Float getValorDespesa() {
+  @Valid
+  public BigDecimal getValorDespesa() {
     return valorDespesa;
   }
 
-  public void setValorDespesa(Float valorDespesa) {
+  public void setValorDespesa(BigDecimal valorDespesa) {
     this.valorDespesa = valorDespesa;
   }
 
-  public LancamentosMesResponse valorReceita(Float valorReceita) {
+  public LancamentosMesResponse valorReceita(BigDecimal valorReceita) {
     this.valorReceita = valorReceita;
     return this;
   }
@@ -127,15 +129,16 @@ public class LancamentosMesResponse   {
   **/
   @ApiModelProperty(value = "")
 
-  public Float getValorReceita() {
+  @Valid
+  public BigDecimal getValorReceita() {
     return valorReceita;
   }
 
-  public void setValorReceita(Float valorReceita) {
+  public void setValorReceita(BigDecimal valorReceita) {
     this.valorReceita = valorReceita;
   }
 
-  public LancamentosMesResponse valorSobra(Float valorSobra) {
+  public LancamentosMesResponse valorSobra(BigDecimal valorSobra) {
     this.valorSobra = valorSobra;
     return this;
   }
@@ -146,11 +149,12 @@ public class LancamentosMesResponse   {
   **/
   @ApiModelProperty(value = "")
 
-  public Float getValorSobra() {
+  @Valid
+  public BigDecimal getValorSobra() {
     return valorSobra;
   }
 
-  public void setValorSobra(Float valorSobra) {
+  public void setValorSobra(BigDecimal valorSobra) {
     this.valorSobra = valorSobra;
   }
 

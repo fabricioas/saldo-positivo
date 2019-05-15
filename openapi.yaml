@@ -100,13 +100,10 @@ components:
           type: integer
         valorDespesa:
           type: number
-          format: float
         valorReceita:
           type: number
-          format: float
         valorSobra:
           type: number
-          format: float
         lancamentos:
           type: array
           items:
@@ -129,10 +126,8 @@ components:
                 format: date
               valorLancamento:
                 type: number
-                format: float
               valorSaldo:
                 type: number
-                format: float
               status:
                 type: string
                 enum: 
@@ -160,10 +155,8 @@ components:
           format: date
         valorTitulo:
           type: number
-          format: float
         valorPago:
           type: number
-          format: float
     LiquidacaoTitulo:
       type: object
       properties:
@@ -172,6 +165,5 @@ components:
           format: date
         valorTitulo:
           type: number
-          format: float
         valorPago:
           type: number

@@ -2,53 +2,47 @@ package br.com.saldo.positivo.bo;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.UUID;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import br.com.saldo.positivo.dao.TituloDao;
 import br.com.saldo.positivo.model.StatusTituloEnum;
-import br.com.saldo.positivo.model.TipoTituloEnum;
 import br.com.saldo.positivo.model.Titulo;
-import br.com.saldo.positivo.swagger.model.LancamentoTitulo;
-import io.github.benas.randombeans.api.EnhancedRandom;
+import br.com.saldo.positivo.util.GenerateUtil;
 
 @Component
-public class TituloBO{
+public class TituloBO {
 	
-	public Titulo createTitulo(LancamentoTitulo lancamento){
-		Titulo titulo = new Titulo();
-		titulo.setId(generateId());
-		titulo.setDescricao(lancamento.getDescricao());
-		titulo.setAno(getAno(lancamento.getDataVencimento()));
-		titulo.setMes(getMes(lancamento.getDataVencimento()));
-		titulo.setDataVencimento(lancamento.getDataVencimento());
-		titulo.setDataLiquidacao(lancamento.getDataLiquidacao()); 
-		titulo.setNumParcela(null);
-		titulo.setNumTotalParcela(null);
-		titulo.setStatus(StatusTituloEnum.PENDENTE);
-		titulo.setTipo(TipoTituloEnum.valueOf(lancamento.getTipo()));
-		titulo.setTituloRef(titulo.getId());
-		titulo.setValorPago(BigDecimal.valueOf(lancamento.getValorPago()));
-		titulo.setValorTitulo(BigDecimal.valueOf(lancamento.getValorTitulo()));
-		return titulo;
+	@Autowired
+	private GenerateUtil generateUtil;
+
+    @Autowired
+    private TituloDao tituloDAO;
+
+	public String createTitulo(Titulo titulo) {
+		titulo.setId(generateUtil.uuid());
+    	tituloDAO.insert(titulo);
+		return titulo.getId();
 	}
 	
-	public String generateId() {
-		return UUID.randomUUID().toString();
+	public String pagamentoTitulo(String id, BigDecimal valorPago, LocalDate dataLiquidacao) {
+		Titulo titulo = tituloDAO.findOne(id);
+		titulo.setDataLiquidacao(dataLiquidacao);
+		titulo.setValorPago(valorPago);
+		titulo.setStatus(StatusTituloEnum.PAGO);
+    	tituloDAO.save(titulo);
+		return titulo.getId();
 	}
 	
-	public Integer getAno(LocalDate data) {
-		if( data == null ) {
-			return null;
-		}
-		return data.getYear();
+	public String deleteTitulo(Titulo titulo) {
+    	tituloDAO.delete(titulo);
+		return titulo.getId();
+	}
+	
+	public List<Titulo> buscaTitulosMes(Integer ano, Integer mes){
+		return tituloDAO.findTituloByAnoAndMes(ano, mes);
 	}
 
-	public Integer getMes(LocalDate data) {
-		if( data == null ) {
-			return null;
-		}
-		return data.getMonthValue();
-	}
-	
-}	
+}

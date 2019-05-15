@@ -15,13 +15,13 @@ import javax.validation.constraints.*;
  * LiquidacaoTitulo
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-05-13T12:56:36.475-03:00[America/Sao_Paulo]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-05-15T09:42:07.118-03:00[America/Sao_Paulo]")
 public class LiquidacaoTitulo   {
   @JsonProperty("dataLiquidacao")
   private LocalDate dataLiquidacao = null;
 
   @JsonProperty("valorTitulo")
-  private Float valorTitulo = null;
+  private BigDecimal valorTitulo = null;
 
   @JsonProperty("valorPago")
   private BigDecimal valorPago = null;
@@ -46,7 +46,7 @@ public class LiquidacaoTitulo   {
     this.dataLiquidacao = dataLiquidacao;
   }
 
-  public LiquidacaoTitulo valorTitulo(Float valorTitulo) {
+  public LiquidacaoTitulo valorTitulo(BigDecimal valorTitulo) {
     this.valorTitulo = valorTitulo;
     return this;
   }
@@ -57,11 +57,12 @@ public class LiquidacaoTitulo   {
   **/
   @ApiModelProperty(value = "")
 
-  public Float getValorTitulo() {
+  @Valid
+  public BigDecimal getValorTitulo() {
     return valorTitulo;
   }
 
-  public void setValorTitulo(Float valorTitulo) {
+  public void setValorTitulo(BigDecimal valorTitulo) {
     this.valorTitulo = valorTitulo;
   }
 
