@@ -1,5 +1,7 @@
 package br.com.saldo.positivo.api;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -54,11 +56,9 @@ public class TitulosApiController implements TitulosApi {
 
     @Override
     public ResponseEntity<LancamentosMesResponse> lancamentosTitulo(@ApiParam(value = "",required=true) @PathVariable("ano") Integer ano,@ApiParam(value = "",required=true) @PathVariable("mes") Integer mes) {
-        if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
-        } else {
-            log.warn("ObjectMapper or HttpServletRequest not configured in default TitulosApi interface so no example is generated");
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    	List<Titulo> titulos =  tituloDAO.findAll();
+    	LancamentosMesResponse response = new LancamentosMesResponse();
+    	return ResponseEntity.ok(response);
     }
 
 
