@@ -1,9 +1,14 @@
 package br.com.saldo.positivo.mapper;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import br.com.saldo.positivo.model.Titulo;
 import br.com.saldo.positivo.swagger.model.LancamentosMesResponse;
@@ -18,12 +23,14 @@ public class LancamentosTituloMapper {
 	public LancamentosMesResponse novo(Integer year, Integer month) {
 		return new LancamentosMesResponse()
 		.ano(year)
-		.mes(month);
+		.mes(month)
+		.nmMes(montaDescricaoMes(month,year))
+		.lancamentos(new LinkedList<LancamentosMesResponseLancamentos>());
 	}
 	
 	public void atualizaValoresTotais(LancamentosMesResponse response, BigDecimal totalReceitas, BigDecimal totalDespesas) {
 		response.setValorReceita(totalReceitas);
-		response.setValorDespesa(totalReceitas);
+		response.setValorDespesa(totalDespesas);
 		response.setValorSobra(totalReceitas.subtract(totalDespesas));
 	}
 
@@ -44,6 +51,9 @@ public class LancamentosTituloMapper {
 	}
 
 	public void atualizaSaldoLancamentos(List<LancamentosMesResponseLancamentos> lancamentos, final BigDecimal saldoInicial) {
+		if( CollectionUtils.isEmpty(lancamentos) ) {
+			return;
+		}
 		BigDecimal saldo = BigDecimal.ZERO;
 		if(saldoInicial != null) {
 			saldo = saldoInicial;
@@ -56,6 +66,10 @@ public class LancamentosTituloMapper {
 			}
 			l.setValorSaldo(saldo);
 		}
+	}
+	
+	public String montaDescricaoMes(Integer mes, Integer ano) {
+		return LocalDate.of(ano, mes, 1).format(DateTimeFormatter.ofPattern("MMMM/yyyy",Locale.forLanguageTag("pt-BR")));
 	}
 
 }

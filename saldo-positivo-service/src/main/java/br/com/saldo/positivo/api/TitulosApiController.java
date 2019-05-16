@@ -58,16 +58,16 @@ public class TitulosApiController implements TitulosApi {
     public ResponseEntity<LancamentosMesResponse> lancamentosTitulo(@ApiParam(value = "",required=true) @PathVariable("ano") Integer ano,@ApiParam(value = "",required=true) @PathVariable("mes") Integer mes) {
     	List<Titulo> titulos = tituloDao.findTituloByAnoAndMes(ano, mes);
     	LancamentosMesResponse lancamentosMes = lancamentosTituloMapper.novo(ano, mes);
-    	lancamentosTituloMapper.atualizaValoresTotais(lancamentosMes, lancamentosTituloBO.calculoReceitas(titulos),lancamentosTituloBO.calculoDespesas(titulos));
     	lancamentosTituloMapper.adicionaLancacamentos(lancamentosMes, titulos);
     	lancamentosTituloMapper.atualizaSaldoLancamentos(lancamentosMes.getLancamentos(), null);
+    	lancamentosTituloMapper.atualizaValoresTotais(lancamentosMes, lancamentosTituloBO.calculoReceitas(titulos),lancamentosTituloBO.calculoDespesas(titulos));
     	return ResponseEntity.ok(lancamentosMes);
     }
 
 
     @Override
     public ResponseEntity<Object> liquidacaoTitulo(@ApiParam(value = "" ,required=true )  @Valid @RequestBody LiquidacaoTitulo body,@ApiParam(value = "",required=true) @PathVariable("id") String id) {
-    	String idTitulo = tituloBO.pagamentoTitulo(id, body.getValorPago(), body.getDataLiquidacao());
+    	String idTitulo = tituloBO.pagamentoTitulo(id, body.getValorPago(),body.getValorTitulo(), body.getDataLiquidacao());
     	return ResponseEntity.ok((Object)idTitulo);
     }
 

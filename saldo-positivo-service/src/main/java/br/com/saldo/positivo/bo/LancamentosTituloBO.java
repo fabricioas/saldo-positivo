@@ -15,7 +15,7 @@ public class LancamentosTituloBO {
 		return titulos
 			.stream()
 			.filter( p -> p.getTipo().equals(TipoTituloEnum.RECEITA))
-			.map( Titulo::getValorTitulo)
+			.map( this::buscaValor)
 			.reduce(BigDecimal::add)
 			.orElse(BigDecimal.ZERO);
 	}
@@ -23,9 +23,17 @@ public class LancamentosTituloBO {
 	public BigDecimal calculoDespesas(List<Titulo> titulos) {
 		return titulos
 				.stream()
-				.filter( p -> p.getTipo().equals(TipoTituloEnum.RECEITA))
-				.map( Titulo::getValorTitulo)
+				.filter( p -> p.getTipo().equals(TipoTituloEnum.DESPESA))
+				.map( this::buscaValor)
 				.reduce(BigDecimal::add)
 				.orElse(BigDecimal.ZERO);
+	}
+	
+	private BigDecimal buscaValor(Titulo t) {
+		if( t.getValorPago() != null && !t.getValorPago().equals(BigDecimal.ZERO)) {
+			return t.getValorPago();
+		}else {
+			return t.getValorTitulo();
+		}
 	}
 }
