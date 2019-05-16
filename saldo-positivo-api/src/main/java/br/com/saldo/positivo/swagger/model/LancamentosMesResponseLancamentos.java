@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
@@ -15,7 +16,7 @@ import javax.validation.constraints.*;
  * LancamentosMesResponseLancamentos
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-05-13T12:56:36.475-03:00[America/Sao_Paulo]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-05-15T09:42:07.118-03:00[America/Sao_Paulo]")
 public class LancamentosMesResponseLancamentos   {
   @JsonProperty("id")
   private String id = null;
@@ -63,10 +64,10 @@ public class LancamentosMesResponseLancamentos   {
   private LocalDate dataLiquidacao = null;
 
   @JsonProperty("valorLancamento")
-  private Float valorLancamento = null;
+  private BigDecimal valorLancamento = null;
 
   @JsonProperty("valorSaldo")
-  private Float valorSaldo = null;
+  private BigDecimal valorSaldo = null;
 
   /**
    * Gets or Sets status
@@ -200,7 +201,7 @@ public class LancamentosMesResponseLancamentos   {
     this.dataLiquidacao = dataLiquidacao;
   }
 
-  public LancamentosMesResponseLancamentos valorLancamento(Float valorLancamento) {
+  public LancamentosMesResponseLancamentos valorLancamento(BigDecimal valorLancamento) {
     this.valorLancamento = valorLancamento;
     return this;
   }
@@ -211,15 +212,16 @@ public class LancamentosMesResponseLancamentos   {
   **/
   @ApiModelProperty(value = "")
 
-  public Float getValorLancamento() {
+  @Valid
+  public BigDecimal getValorLancamento() {
     return valorLancamento;
   }
 
-  public void setValorLancamento(Float valorLancamento) {
+  public void setValorLancamento(BigDecimal valorLancamento) {
     this.valorLancamento = valorLancamento;
   }
 
-  public LancamentosMesResponseLancamentos valorSaldo(Float valorSaldo) {
+  public LancamentosMesResponseLancamentos valorSaldo(BigDecimal valorSaldo) {
     this.valorSaldo = valorSaldo;
     return this;
   }
@@ -230,11 +232,12 @@ public class LancamentosMesResponseLancamentos   {
   **/
   @ApiModelProperty(value = "")
 
-  public Float getValorSaldo() {
+  @Valid
+  public BigDecimal getValorSaldo() {
     return valorSaldo;
   }
 
-  public void setValorSaldo(Float valorSaldo) {
+  public void setValorSaldo(BigDecimal valorSaldo) {
     this.valorSaldo = valorSaldo;
   }
 
