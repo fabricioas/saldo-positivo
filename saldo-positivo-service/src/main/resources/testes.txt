@@ -1,0 +1,17 @@
+{
+  "ano": 2019,
+  "dataLiquidacao": null,
+  "dataVencimento": "2019-01-11",
+  "descricao": "Adinatamento Salario",
+  "mes": 1,
+  "tipo": "RECEITA",
+  "valorPago": null,
+  "valorTitulo": 1000
+}
+
+
+{
+  "dataLiquidacao": "2019-01-09",
+  "valorPago": 190.30,
+  "valorTitulo": 190.30
+}

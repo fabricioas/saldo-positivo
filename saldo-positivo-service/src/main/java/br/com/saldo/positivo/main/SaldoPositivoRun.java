@@ -14,7 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @ComponentScan(basePackages = { "br.com.saldo.positivo.main", "br.com.saldo.positivo.api" , 
 		"br.com.saldo.positivo.config","br.com.saldo.positivo.controller",
-		"br.com.saldo.positivo.bo"})
+		"br.com.saldo.positivo.bo","br.com.saldo.positivo.mapper","br.com.saldo.positivo.util"})
 public class SaldoPositivoRun implements CommandLineRunner {
 
     @Override

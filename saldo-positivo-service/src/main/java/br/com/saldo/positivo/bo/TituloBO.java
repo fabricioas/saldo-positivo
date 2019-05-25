@@ -14,34 +14,37 @@ import br.com.saldo.positivo.util.GenerateUtil;
 
 @Component
 public class TituloBO {
-	
+
 	@Autowired
 	private GenerateUtil generateUtil;
 
-    @Autowired
-    private TituloDao tituloDAO;
+	@Autowired
+	private TituloDao tituloDAO;
 
 	public String createTitulo(Titulo titulo) {
 		titulo.setId(generateUtil.uuid());
-    	tituloDAO.insert(titulo);
+		tituloDAO.insert(titulo);
 		return titulo.getId();
 	}
-	
-	public String pagamentoTitulo(String id, BigDecimal valorPago, LocalDate dataLiquidacao) {
+
+	public String pagamentoTitulo(String id, BigDecimal valorPago, BigDecimal valorTitulo, LocalDate dataLiquidacao) {
 		Titulo titulo = tituloDAO.findOne(id);
 		titulo.setDataLiquidacao(dataLiquidacao);
 		titulo.setValorPago(valorPago);
+		if (valorTitulo != null && BigDecimal.ZERO.compareTo(valorTitulo) != 0) {
+			titulo.setValorTitulo(valorPago);
+		}
 		titulo.setStatus(StatusTituloEnum.PAGO);
-    	tituloDAO.save(titulo);
+		tituloDAO.save(titulo);
 		return titulo.getId();
 	}
-	
+
 	public String deleteTitulo(Titulo titulo) {
-    	tituloDAO.delete(titulo);
+		tituloDAO.delete(titulo);
 		return titulo.getId();
 	}
-	
-	public List<Titulo> buscaTitulosMes(Integer ano, Integer mes){
+
+	public List<Titulo> buscaTitulosMes(Integer ano, Integer mes) {
 		return tituloDAO.findTituloByAnoAndMes(ano, mes);
 	}
 
