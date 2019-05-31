@@ -1,0 +1,21 @@
+.tbl-titulos{
+    border: 1px solid #000000;
+    width: 900px;
+    border-collapse: collapse;
+}
+
+.tbl-titulos th{
+    border: 1px solid #000000;
+}
+
+.tbl-align-left{
+    text-align: left;
+}
+
+.tbl-title{
+    background-color: silver
+}
+
+.tbl-subtitle{
+    background-color: grey;
+}

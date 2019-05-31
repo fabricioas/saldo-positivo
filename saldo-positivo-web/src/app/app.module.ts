@@ -14,12 +14,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { OrcamentoFamiliarComponent } from './orcamento-familiar/orcamento-familiar.component';
+import { PlanejamentoFinanceiroComponent } from './planejamento-financeiro/planejamento-financeiro.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
-    OrcamentoFamiliarComponent
+    OrcamentoFamiliarComponent,
+    PlanejamentoFinanceiroComponent
   ],
   imports: [
     HttpClientModule,
