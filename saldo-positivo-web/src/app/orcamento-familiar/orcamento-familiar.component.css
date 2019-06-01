@@ -1,16 +1,8 @@
 table{
     width: 100%;
+    text-align: left;
+    border: 1px solid #000000;
+
 }
 
-.example-first-header-row th {
-    border-bottom: none;
-  }
-  
-  .example-second-header-row {
-    font-style: italic;
-  }
-  
-  .example-first-footer-row {
-    font-weight: bold;
-  }
   

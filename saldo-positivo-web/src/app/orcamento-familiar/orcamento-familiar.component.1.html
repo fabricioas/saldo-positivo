@@ -1,0 +1,78 @@
+<mat-card>
+  <mat-card-title>
+    <span>
+    Lançamentos - {{mes}}/{{ano}}
+  </span> 
+    <mat-chip-list>
+      <mat-chip>Mês Anterior</mat-chip>
+      <mat-chip>Proximo Mês</mat-chip>
+      <button mat-icon-button>
+          <mat-icon>add</mat-icon>
+        </button>
+      
+    </mat-chip-list>
+  </mat-card-title>
+  <mat-card-content>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+    
+      <!-- Position Column -->
+      <ng-container matColumnDef="nmLancamento">
+        <th mat-header-cell *matHeaderCellDef> Lançamentos </th>
+        <td mat-cell *matCellDef="let element"> {{element.nmLancamento}} </td>
+      </ng-container>
+    
+      <!-- Name Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+      </ng-container>
+    
+      <!-- Weight Column -->
+      <ng-container matColumnDef="tipeLancamento">
+        <th mat-header-cell *matHeaderCellDef> Tipo </th>
+        <td mat-cell *matCellDef="let element"> {{element.tipeLancamento}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dataVencimento">
+        <th mat-header-cell *matHeaderCellDef> Data Vencimento </th>
+        <td mat-cell *matCellDef="let element"> {{element.dataVencimento}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="valorLancamento">
+        <th mat-header-cell *matHeaderCellDef> Valor </th>
+        <td mat-cell *matCellDef="let element"> {{element.valorLancamento}} </td>
+      </ng-container>
+      <ng-container matColumnDef="descript">
+          <th mat-header-cell *matHeaderCellDef>  </th>
+          <td mat-cell *matCellDef="let element">
+              <button mat-icon-button>
+                  <mat-icon>description</mat-icon>
+                </button>
+          </td>
+        </ng-container>
+      <ng-container matColumnDef="edit">
+          <th mat-header-cell *matHeaderCellDef>  </th>
+          <td mat-cell *matCellDef="let element">
+              <button mat-icon-button>
+                  <mat-icon>edit</mat-icon>
+                </button>
+          </td>
+        </ng-container>
+      <ng-container matColumnDef="delete">
+          <th mat-header-cell *matHeaderCellDef>  </th>
+          <td mat-cell *matCellDef="let element">
+              <button mat-icon-button>
+                  <mat-icon>delete</mat-icon>
+                </button>
+          </td>
+        </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>    
+  </mat-card-content>
+</mat-card>

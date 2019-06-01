@@ -13,7 +13,7 @@ export interface LancamentosMesResponseLancamentos  {
   dataVencimento : String;
 }
 
-const ELEMENT_DATA: LancamentosMesResponseLancamentos[] = [
+const RECEITA_DATA: LancamentosMesResponseLancamentos[] = [
   {id: "1", nmLancamento: 'Luz', status: "PAGO", tipeLancamento: 'DESPESA',valorLancamento:187.90,valorSaldo: 1020.45, dataLiquidacao: "2019-5-10",dataVencimento: "2019-5-10"}
 ];
 
@@ -46,7 +46,7 @@ export class OrcamentoFamiliarComponent implements OnInit {
   mes="Maio";
   ano="2019";
   displayedColumns: string[] = ['nmLancamento', 'status', 'tipeLancamento', 'valorLancamento','dataVencimento','descript','edit','delete'];
-  dataSource = ELEMENT_DATA;
+  
 
 }
 
