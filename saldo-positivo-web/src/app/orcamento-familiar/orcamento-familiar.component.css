@@ -1,8 +1,36 @@
-table{
-    width: 100%;
-    text-align: left;
-    border: 1px solid #000000;
 
+table{
+    text-align: left;
+   border-collapse: collapse;
+    display: inline-block;  
 }
 
-  
+table tr{
+    border-bottom: 1px solid white;
+    font-family: Roboto;
+    font-size: 12px;
+}
+
+.div{
+    height: 100%;
+}
+
+.div-space{
+    width: 50px;
+}
+
+.lancamentos{
+    height: 100%;
+    border-collapse: collapse;
+    background-color: rgb(202, 224, 224);
+    cursor: pointer;
+}
+      
+div{
+    display: inline-table;
+    vertical-align: top;
+    border-spacing: 20px;
+    border: 1px solid silver;
+    border-radius: 10px;
+    box-shadow: 2px 2px gray;
+}

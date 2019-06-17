@@ -5,9 +5,7 @@
  */
 package br.com.saldo.positivo.swagger.api;
 
-import br.com.saldo.positivo.swagger.model.LancamentoTitulo;
-import br.com.saldo.positivo.swagger.model.LancamentosMesResponse;
-import br.com.saldo.positivo.swagger.model.LiquidacaoTitulo;
+import br.com.saldo.positivo.swagger.model.LancamentoMes;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.*;
 import org.slf4j.Logger;
@@ -31,7 +29,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-05-15T09:42:07.118-03:00[America/Sao_Paulo]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-06-16T21:10:59.863-03:00[America/Sao_Paulo]")
 @Api(value = "titulos", description = "the titulos API")
 public interface TitulosApi {
 
@@ -49,15 +47,12 @@ public interface TitulosApi {
         return getRequest().map(r -> r.getHeader("Accept"));
     }
 
-    @ApiOperation(value = "Serviço para realizar lançamentos de despesas do mes", nickname = "lancamentoTitulo", notes = "", response = Object.class, tags={ "Titulos", })
+    @ApiOperation(value = "Serviço para realizar lançamentos de despesas do mes", nickname = "deleteLancamentosTitulo", notes = "", tags={ "Titulos", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Sucesso", response = Object.class),
-        @ApiResponse(code = 405, message = "Invalid input") })
-    @RequestMapping(value = "/titulos/lancamento/",
-        produces = { "application/json" }, 
-        consumes = { "application/json" },
-        method = RequestMethod.POST)
-    default ResponseEntity<Object> lancamentoTitulo(@ApiParam(value = "" ,required=true )  @Valid @RequestBody LancamentoTitulo body) {
+        @ApiResponse(code = 200, message = "Sucesso") })
+    @RequestMapping(value = "/titulos/lancamento/{id}",
+        method = RequestMethod.DELETE)
+    default ResponseEntity<Void> deleteLancamentosTitulo(@ApiParam(value = "",required=true) @PathVariable("id") String id) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
         } else {
             log.warn("ObjectMapper or HttpServletRequest not configured in default TitulosApi interface so no example is generated");
@@ -66,14 +61,13 @@ public interface TitulosApi {
     }
 
 
-    @ApiOperation(value = "Serviço para realizar lançamentos de despesas do mes", nickname = "lancamentosTitulo", notes = "", response = LancamentosMesResponse.class, tags={ "Titulos", })
+    @ApiOperation(value = "Serviço para realizar lançamentos de despesas do mes", nickname = "lancamentosTitulo", notes = "", response = LancamentoMes.class, responseContainer = "List", tags={ "Titulos", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Sucesso", response = LancamentosMesResponse.class),
-        @ApiResponse(code = 405, message = "Invalid input") })
-    @RequestMapping(value = "/titulos/lancamentos/{ano}/{mes}",
+        @ApiResponse(code = 200, message = "Sucesso", response = LancamentoMes.class, responseContainer = "List") })
+    @RequestMapping(value = "/titulos/lancamentos/{tipo}/{ano}/{mes}",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    default ResponseEntity<LancamentosMesResponse> lancamentosTitulo(@ApiParam(value = "",required=true) @PathVariable("ano") Integer ano,@ApiParam(value = "",required=true) @PathVariable("mes") Integer mes) {
+    default ResponseEntity<List<LancamentoMes>> lancamentosTitulo(@ApiParam(value = "",required=true) @PathVariable("tipo") Integer tipo,@ApiParam(value = "",required=true) @PathVariable("ano") Integer ano,@ApiParam(value = "",required=true) @PathVariable("mes") Integer mes) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
         } else {
             log.warn("ObjectMapper or HttpServletRequest not configured in default TitulosApi interface so no example is generated");
@@ -82,15 +76,27 @@ public interface TitulosApi {
     }
 
 
-    @ApiOperation(value = "Serviço para realizar lançamentos de despesas do mes", nickname = "liquidacaoTitulo", notes = "", response = Object.class, tags={ "Titulos", })
+    @ApiOperation(value = "Serviço para realizar lançamentos de despesas do mes", nickname = "postLancamentosTitulo", notes = "", tags={ "Titulos", })
     @ApiResponses(value = { 
-        @ApiResponse(code = 200, message = "Sucesso", response = Object.class),
-        @ApiResponse(code = 405, message = "Invalid input") })
-    @RequestMapping(value = "/titulos/liquidacao/{id}",
-        produces = { "application/json" }, 
+        @ApiResponse(code = 200, message = "Sucesso") })
+    @RequestMapping(value = "/titulos/lancamento",
         consumes = { "application/json" },
         method = RequestMethod.POST)
-    default ResponseEntity<Object> liquidacaoTitulo(@ApiParam(value = "" ,required=true )  @Valid @RequestBody LiquidacaoTitulo body,@ApiParam(value = "",required=true) @PathVariable("id") String id) {
+    default ResponseEntity<Void> postLancamentosTitulo(@ApiParam(value = "" ,required=true )  @Valid @RequestBody LancamentoMes body) {
+        if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
+        } else {
+            log.warn("ObjectMapper or HttpServletRequest not configured in default TitulosApi interface so no example is generated");
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+
+    @ApiOperation(value = "Serviço para realizar lançamentos de despesas do mes", nickname = "putLancamentosTitulo", notes = "", tags={ "Titulos", })
+    @ApiResponses(value = { 
+        @ApiResponse(code = 200, message = "Sucesso") })
+    @RequestMapping(value = "/titulos/lancamento/{id}",
+        method = RequestMethod.PUT)
+    default ResponseEntity<Void> putLancamentosTitulo(@ApiParam(value = "",required=true) @PathVariable("id") String id) {
         if(getObjectMapper().isPresent() && getAcceptHeader().isPresent()) {
         } else {
             log.warn("ObjectMapper or HttpServletRequest not configured in default TitulosApi interface so no example is generated");

@@ -1,0 +1,58 @@
+<mat-card>
+  <mat-card-title>
+    <span>
+      Lançamentos - {{mes}}/{{ano}}
+    </span>
+    <mat-chip-list>
+      <mat-chip>Mês Anterior</mat-chip>
+      <mat-chip>Proximo Mês</mat-chip>
+      <button mat-icon-button>
+        <mat-icon>add</mat-icon>
+      </button>
+
+    </mat-chip-list>
+  </mat-card-title>
+  <mat-card-content>
+    <mat-grid-list cols="2">
+      <mat-grid-tile>
+        <div style="width: 100%">
+          <div>Recebimentos</div>
+          <mat-divider></mat-divider>
+          <mat-table [dataSource]="recebimentoDataSet" class="mat-elevation-z8">
+            <!-- Position Column -->
+            <ng-container matColumnDef="diaVencimento">
+              <mat-header-cell *matHeaderCellDef> Dia </mat-header-cell>
+              <mat-cell *matCellDef="let item"> {{item.diaVencimento}} </mat-cell>
+              <mat-footer-cell *matFooterCellDef> Total </mat-footer-cell>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="nmLancamento">
+              <mat-header-cell *matHeaderCellDef> Lançamento </mat-header-cell>
+              <mat-cell *matCellDef="let item"> {{item.nmLancamento}} </mat-cell>
+              <mat-footer-cell *matFooterCellDef> </mat-footer-cell>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="valorPlanejado">
+              <mat-header-cell *matHeaderCellDef> Planejado </mat-header-cell>
+              <mat-cell *matCellDef="let item"> {{item.valorPlanejado }} </mat-cell>
+              <mat-footer-cell *matFooterCellDef>{{getTotalPlanejado()}} </mat-footer-cell>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="valorPago">
+              <mat-header-cell *matHeaderCellDef> Pago </mat-header-cell>
+              <mat-cell *matCellDef="let item"> {{item.valorPago }} </mat-cell>
+              <mat-footer-cell *matFooterCellDef> {{getTotalPago()}} </mat-footer-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            <mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>
+          </mat-table>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+</mat-card>

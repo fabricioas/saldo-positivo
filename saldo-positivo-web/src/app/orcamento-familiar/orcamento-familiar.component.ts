@@ -1,22 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {MatIconRegistry} from '@angular/material';
-import {DomSanitizer} from '@angular/platform-browser';
-
-export interface LancamentosMesResponseLancamentos  {
-  id : String;
-  nmLancamento : String;
-  status : String;
-  tipeLancamento : String;
-  valorLancamento : Number;
-  valorSaldo : Number;
-  dataLiquidacao : String;
-  dataVencimento : String;
-}
-
-const RECEITA_DATA: LancamentosMesResponseLancamentos[] = [
-  {id: "1", nmLancamento: 'Luz', status: "PAGO", tipeLancamento: 'DESPESA',valorLancamento:187.90,valorSaldo: 1020.45, dataLiquidacao: "2019-5-10",dataVencimento: "2019-5-10"}
-];
-
+import {OrcamentoFamiliarService} from '../OrcamentoFamiliar.service';
+import {MatDialog} from '@angular/material/dialog';
+import {LancamentoTituloComponent} from '../lancamento-titulo/lancamento-titulo.component';
 @Component({
   selector: 'app-orcamento-familiar',
   templateUrl: './orcamento-familiar.component.html',
@@ -24,29 +9,42 @@ const RECEITA_DATA: LancamentosMesResponseLancamentos[] = [
 })
 
 export class OrcamentoFamiliarComponent implements OnInit {
-
-  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
-    iconRegistry.addSvgIcon(
-      'add',
-      sanitizer.bypassSecurityTrustResourceUrl('assets/img/baseline-add-24px.svg'));
-  iconRegistry.addSvgIcon(
-        'delete',
-        sanitizer.bypassSecurityTrustResourceUrl('assets/img/baseline-delete-24px.svg'));
-    iconRegistry.addSvgIcon(
-      'edit',
-      sanitizer.bypassSecurityTrustResourceUrl('assets/img/baseline-create-24px.svg'));
-      iconRegistry.addSvgIcon(
-        'descript',
-        sanitizer.bypassSecurityTrustResourceUrl('assets/img/baseline-description-24px.svg'));
-        
-    }
-  ngOnInit() {
-  }
-
+  recebimentoDataSet;
+  gastosFixosDataSet;
+  gastosPeriodicosDataSet;
   mes="Maio";
   ano="2019";
-  displayedColumns: string[] = ['nmLancamento', 'status', 'tipeLancamento', 'valorLancamento','dataVencimento','descript','edit','delete'];
-  
+ 
+  constructor(private service : OrcamentoFamiliarService, private dialog: MatDialog) {}
+  ngOnInit() {
+    this.service.getTitulosRecebimento(1,2019).subscribe( data =>{
+      this.recebimentoDataSet = data;    
+    })
+    this.gastosFixosDataSet = this.service.getTitulosGastosFixos(1,2019);    
+    this.gastosPeriodicosDataSet = this.service.getTitulosGastosPeriodicos(1,2019);    
+  }
+
+  getTotalPlanejado() {
+    if( this.recebimentoDataSet){
+      return this.recebimentoDataSet.map(t => t.valorPlanejado).reduce((acc, value) => acc + value, 0);
+    }
+    return 0;
+  }
+
+  getTotalPago() {
+    if( this.recebimentoDataSet){
+      return this.recebimentoDataSet.map(t => t.valorEfetivo).reduce((acc, value) => acc + value, 0);
+    }
+    return 0;
+  }
+
+  openLancamentos(): void {
+    const dialogRef = this.dialog.open(LancamentoTituloComponent, {
+      width: '500px',
+      data: {}
+    });
+
+  }
 
 }
 

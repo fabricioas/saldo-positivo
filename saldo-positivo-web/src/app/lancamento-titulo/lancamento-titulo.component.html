@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Lançamento</h1>
+  <div mat-dialog-content>
+    <p>Recebimento</p>
+    <mat-form-field style="width:300px">
+      <input matInput placeholder="Descrição" (ngModel)="data.nmLancamento">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Valor Planejado" (ngModel)="data.valorPlanejado">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Valor Efetivo" (ngModel)="data.valorEfetivo">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="false">Fechar</button>
+    <button mat-button (click)="salvar()" cdkFocusInitial>Salvar</button>
+  </div>

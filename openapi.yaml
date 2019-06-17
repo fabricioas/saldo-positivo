@@ -1,18 +1,23 @@
 openapi: 3.0.1
 info:
-  title: Serviços de Titulos
+  title: Orçamento Familiar API
   version: 1.0.0
 tags:
   - name: Titulos
     description: Lançamentos de Despesas e Receitas mensal
 paths:
-  '/titulos/lancamentos/{ano}/{mes}':
+  '/titulos/lancamentos/{tipo}/{ano}/{mes}':
     get:
       tags:
         - Titulos
       summary: Serviço para realizar lançamentos de despesas do mes
       operationId: lancamentosTitulo
       parameters:
+        - name: tipo
+          in: path
+          required: true
+          schema:
+            type: integer
         - name: ano
           in: path
           required: true
@@ -29,46 +34,15 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/LancamentosMesResponse'
-        '405':
-          description: Invalid input
-          content: {}
-  '/titulos/lancamento/':
-    post:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LancamentoMes'
+  '/titulos/lancamento/{id}':
+    put:
       tags:
         - Titulos
       summary: Serviço para realizar lançamentos de despesas do mes
-      operationId: lancamentoTitulo
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/LancamentoTitulo'
-      responses:
-        '200':
-          description: Sucesso
-          content:
-            application/json:
-              schema:
-                properties:
-                  id:
-                    type: string
-        '405':
-          description: Invalid input
-          content: {}
-  '/titulos/liquidacao/{id}':
-    post:
-      tags:
-        - Titulos
-      summary: Serviço para realizar lançamentos de despesas do mes
-      operationId: liquidacaoTitulo
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/LiquidacaoTitulo'
+      operationId: putLancamentosTitulo
       parameters:
         - name: id
           in: path
@@ -78,92 +52,53 @@ paths:
       responses:
         '200':
           description: Sucesso
-          content:
-            application/json:
-              schema:
-                properties:
-                  id:
-                    type: string
-        '405':
-          description: Invalid input
-          content: {}
+    delete:
+      tags:
+        - Titulos
+      summary: Serviço para realizar lançamentos de despesas do mes
+      operationId: deleteLancamentosTitulo
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Sucesso
+  '/titulos/lancamento':
+    post:
+      tags:
+        - Titulos
+      summary: Serviço para realizar lançamentos de despesas do mes
+      operationId: postLancamentosTitulo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LancamentoMes'
+      responses:
+        '200':
+          description: Sucesso
 components:
   schemas:
-    LancamentosMesResponse:
+    LancamentoMes:
       type: object
       properties:
-        nmMes:
+        id: 
           type: string
-        mes:
+        nmLancamento:
+          type: string
+        diaVencimento:
           type: integer
-        ano:
-          type: integer
-        valorDespesa:
+        valorPlanejado:
           type: number
-        valorReceita:
+        valorEfetivo:
           type: number
-        valorSobra:
-          type: number
-        lancamentos:
-          type: array
-          items:
-            type: object
-            properties:
-              id: 
-                type: string
-              tipeLancamento:
-                type: string
-                enum: 
-                  - RECEITA
-                  - DESPESA
-              nmLancamento:
-                type: string
-              dataVencimento:
-                type: string
-                format: date
-              dataLiquidacao:
-                type: string
-                format: date
-              valorLancamento:
-                type: number
-              valorSaldo:
-                type: number
-              status:
-                type: string
-                enum: 
-                  - PENDENTE
-                  - PAGO
-                  - ATRASADO
-    LancamentoTitulo:
-      type: object
-      properties:
-        id:
+        status:
           type: string
-        descricao:
-          type: string
-        tipo:
-          type: string
-        mes:
-          type: integer
-        ano:
-          type: integer
-        dataVencimento:
-          type: string
-          format: date
-        dataLiquidacao:
-          type: string
-          format: date
-        valorTitulo:
-          type: number
-        valorPago:
-          type: number
-    LiquidacaoTitulo:
-      type: object
-      properties:
-        dataLiquidacao:
-          type: string
-          format: date
-        valorTitulo:
-          type: number
-        valorPago:
-          type: number
+          enum: 
+            - PENDENTE
+            - PAGO
+            - ATRASADO

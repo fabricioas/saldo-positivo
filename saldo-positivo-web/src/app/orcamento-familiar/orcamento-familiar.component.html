@@ -6,26 +6,168 @@
     <mat-chip-list>
       <mat-chip>Mês Anterior</mat-chip>
       <mat-chip>Proximo Mês</mat-chip>
-      <button mat-icon-button>
-        <mat-icon>add</mat-icon>
+      <button mat-icon-button [matMenuTriggerFor]="aboveMenu">
+        <mat-icon>add</mat-icon>        
+      </button>
+      <mat-menu #aboveMenu="matMenu" yPosition="above">
+        <button mat-menu-item (clickcd) = "openLancamentos()">Recebimento</button>
+        <button mat-menu-item>Pagamento</button>
+      </mat-menu>
+      <button mat-icon-button >
+        <mat-icon>payment</mat-icon>        
+      </button>
+      <button mat-icon-button >
+        <mat-icon>delete_forever</mat-icon>        
       </button>
 
     </mat-chip-list>
   </mat-card-title>
   <mat-card-content>
-    <table>
-      <tr>
-        <th width=200>Lançamento</th>
-        <th width=150>Valor Planejado</th>
-        <th width=150>Valor Efetivo</th>
-        <th></th>
-      </tr>
-      <tr>
-        <td>Luz</td>
-        <td>128,34</td>
-        <td>158,40</td>
-        <td></td>
-      </tr>
-    </table>
+    <div class="div">
+      <table class="lancamentos">
+        <thead>
+          <tr style="height: 30px; background-color: teal; color: white;">
+            <th>#</th>
+            <th width=400>Lançamento</th>
+            <th width=100>Planejado</th>
+            <th width=100>Efetivo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="height: 20px; background-color:gray; color: white">
+            <th width=200 colspan="4">RECEBIMENTOS</th>
+          </tr>
+          <tr *ngFor="let item of recebimentoDataSet ">
+            <td><input type="radio" name="lancamento" /></td>
+            <td>{{item.nmLancamento}}</td>
+            <td>{{item.valorPlanejado}}</td>
+            <td>{{item.valorEfetivo}}</td>
+          </tr>
+          <tr>
+            <th></th>
+            <th>Total</th>
+            <th>{{getTotalPlanejado()}}</th>
+            <th>{{getTotalPago()}}</th>
+          </tr>
+          <tr style="height: 20px; background-color:gray; color: white">
+            <th width=200 colspan="4">PAGAMENTOS</th>
+          </tr>
+          <tr style="height: 20px; ">
+            <th width=200 colspan="4">Gastos Fixos</th>
+          </tr>
+          <tr *ngFor="let item of recebimentoDataSet">
+            <td><input type="radio" name="lancamento" /></td>
+            <td>{{item.nmLancamento}}</td>
+            <td>{{item.valorPlanejado}}</td>
+            <td>{{item.valorEfetivo}}</td>
+          </tr>
+          <tr>
+            <th></th>
+            <th>Total</th>
+            <th>{{getTotalPlanejado()}}</th>
+            <th>{{getTotalPago()}}</th>
+          </tr>
+          <tr style="height: 20px; ">
+            <th width=200 colspan="4">Gastos Periódicos</th>
+          </tr>
+          <tr *ngFor="let item of recebimentoDataSet">
+            <td><input type="radio" name="lancamento" /></td>
+            <td>{{item.nmLancamento}}</td>
+            <td>{{item.valorPlanejado}}</td>
+            <td>{{item.valorEfetivo}}</td>
+          </tr>
+          <tr>
+            <th></th>
+            <th>Total</th>
+            <th>{{getTotalPlanejado()}}</th>
+            <th>{{getTotalPago()}}</th>
+          </tr>
+          <tr style="height: 20px; ">
+              <th width=200 colspan="4">Cartão de Crédito</th>
+            </tr>
+            <tr *ngFor="let item of recebimentoDataSet">
+              <td><input type="radio" name="lancamento" /></td>
+              <td>{{item.nmLancamento}}</td>
+              <td>{{item.valorPlanejado}}</td>
+              <td>{{item.valorEfetivo}}</td>
+            </tr>
+            <tr>
+              <th></th>
+              <th>Total</th>
+              <th>{{getTotalPlanejado()}}</th>
+              <th>{{getTotalPago()}}</th>
+            </tr>
+            <tr style="height: 20px; background-color:gray; color: white">
+            <th width=200 colspan="4">INVESTIMENTOS</th>
+          </tr>
+          <tr>
+            <th width=200 colspan="4">Aportes</th>
+          </tr>
+          <tr *ngFor="let item of recebimentoDataSet">
+            <td><input type="radio" name="lancamento" /></td>
+            <td>{{item.nmLancamento}}</td>
+            <td>{{item.valorPlanejado}}</td>
+            <td>{{item.valorEfetivo}}</td>
+          </tr>
+          <tr>
+            <th></th>
+            <th>Total</th>
+            <th>{{getTotalPlanejado()}}</th>
+            <th>{{getTotalPago()}}</th>
+          </tr>
+          <tr>
+            <th width=200 colspan="4">Resgates</th>
+          </tr>
+          <tr *ngFor="let item of recebimentoDataSet">
+            <td><input type="radio" name="lancamento" /></td>
+            <td>{{item.nmLancamento}}</td>
+            <td>{{item.valorPlanejado}}</td>
+            <td>{{item.valorEfetivo}}</td>
+          </tr>
+          <tr>
+            <th></th>
+            <th>Total</th>
+            <th>{{getTotalPlanejado()}}</th>
+            <th>{{getTotalPago()}}</th>
+          </tr>
+          <tr>
+            <th width=200 colspan="4">Desembolsos</th>
+          </tr>
+          <tr *ngFor="let item of recebimentoDataSet">
+            <td><input type="radio" name="lancamento" /></td>
+            <td>{{item.nmLancamento}}</td>
+            <td>{{item.valorPlanejado}}</td>
+            <td>{{item.valorEfetivo}}</td>
+          </tr>
+          <tr>
+            <th></th>
+            <th>Total</th>
+            <th>{{getTotalPlanejado()}}</th>
+            <th>{{getTotalPago()}}</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="div-space"></div>
+    <div>
+      <table>
+        <tr>
+          <th>Valores</th>
+          <th>Totais</th>
+        </tr>
+        <tr>
+          <th>Recebimento</th>
+          <th>1234</th>
+        </tr>
+        <tr>
+          <th>Pagamentos</th>
+          <th>1234</th>
+        </tr>
+        <tr>
+          <th>Investimentos</th>
+          <th>1234</th>
+        </tr>
+      </table>
+    </div>
   </mat-card-content>
 </mat-card>
