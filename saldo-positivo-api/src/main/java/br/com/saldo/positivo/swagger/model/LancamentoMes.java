@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -15,7 +16,7 @@ import javax.validation.constraints.*;
  * LancamentoMes
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-06-16T21:10:59.863-03:00[America/Sao_Paulo]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-06-17T19:17:34.294-03:00[America/Sao_Paulo]")
 public class LancamentoMes   {
   @JsonProperty("id")
   private String id = null;
@@ -26,6 +27,15 @@ public class LancamentoMes   {
   @JsonProperty("diaVencimento")
   private Integer diaVencimento = null;
 
+  @JsonProperty("mesVencimento")
+  private Integer mesVencimento = null;
+
+  @JsonProperty("anoVencimento")
+  private Integer anoVencimento = null;
+
+  @JsonProperty("dataPagamento")
+  private LocalDate dataPagamento = null;
+
   @JsonProperty("valorPlanejado")
   private BigDecimal valorPlanejado = null;
 
@@ -33,9 +43,9 @@ public class LancamentoMes   {
   private BigDecimal valorEfetivo = null;
 
   /**
-   * Gets or Sets status
+   * Gets or Sets statusLancamento
    */
-  public enum StatusEnum {
+  public enum StatusLancamentoEnum {
     PENDENTE("PENDENTE"),
     
     PAGO("PAGO"),
@@ -44,7 +54,7 @@ public class LancamentoMes   {
 
     private String value;
 
-    StatusEnum(String value) {
+    StatusLancamentoEnum(String value) {
       this.value = value;
     }
 
@@ -55,8 +65,8 @@ public class LancamentoMes   {
     }
 
     @JsonCreator
-    public static StatusEnum fromValue(String text) {
-      for (StatusEnum b : StatusEnum.values()) {
+    public static StatusLancamentoEnum fromValue(String text) {
+      for (StatusLancamentoEnum b : StatusLancamentoEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
           return b;
         }
@@ -64,8 +74,8 @@ public class LancamentoMes   {
       return null;
     }
   }
-  @JsonProperty("status")
-  private StatusEnum status = null;
+  @JsonProperty("statusLancamento")
+  private StatusLancamentoEnum statusLancamento = null;
 
   public LancamentoMes id(String id) {
     this.id = id;
@@ -124,6 +134,64 @@ public class LancamentoMes   {
     this.diaVencimento = diaVencimento;
   }
 
+  public LancamentoMes mesVencimento(Integer mesVencimento) {
+    this.mesVencimento = mesVencimento;
+    return this;
+  }
+
+  /**
+   * Get mesVencimento
+   * @return mesVencimento
+  **/
+  @ApiModelProperty(value = "")
+
+  public Integer getMesVencimento() {
+    return mesVencimento;
+  }
+
+  public void setMesVencimento(Integer mesVencimento) {
+    this.mesVencimento = mesVencimento;
+  }
+
+  public LancamentoMes anoVencimento(Integer anoVencimento) {
+    this.anoVencimento = anoVencimento;
+    return this;
+  }
+
+  /**
+   * Get anoVencimento
+   * @return anoVencimento
+  **/
+  @ApiModelProperty(value = "")
+
+  public Integer getAnoVencimento() {
+    return anoVencimento;
+  }
+
+  public void setAnoVencimento(Integer anoVencimento) {
+    this.anoVencimento = anoVencimento;
+  }
+
+  public LancamentoMes dataPagamento(LocalDate dataPagamento) {
+    this.dataPagamento = dataPagamento;
+    return this;
+  }
+
+  /**
+   * Get dataPagamento
+   * @return dataPagamento
+  **/
+  @ApiModelProperty(value = "")
+
+  @Valid
+  public LocalDate getDataPagamento() {
+    return dataPagamento;
+  }
+
+  public void setDataPagamento(LocalDate dataPagamento) {
+    this.dataPagamento = dataPagamento;
+  }
+
   public LancamentoMes valorPlanejado(BigDecimal valorPlanejado) {
     this.valorPlanejado = valorPlanejado;
     return this;
@@ -164,23 +232,23 @@ public class LancamentoMes   {
     this.valorEfetivo = valorEfetivo;
   }
 
-  public LancamentoMes status(StatusEnum status) {
-    this.status = status;
+  public LancamentoMes statusLancamento(StatusLancamentoEnum statusLancamento) {
+    this.statusLancamento = statusLancamento;
     return this;
   }
 
   /**
-   * Get status
-   * @return status
+   * Get statusLancamento
+   * @return statusLancamento
   **/
   @ApiModelProperty(value = "")
 
-  public StatusEnum getStatus() {
-    return status;
+  public StatusLancamentoEnum getStatusLancamento() {
+    return statusLancamento;
   }
 
-  public void setStatus(StatusEnum status) {
-    this.status = status;
+  public void setStatusLancamento(StatusLancamentoEnum statusLancamento) {
+    this.statusLancamento = statusLancamento;
   }
 
 
@@ -196,14 +264,17 @@ public class LancamentoMes   {
     return Objects.equals(this.id, lancamentoMes.id) &&
         Objects.equals(this.nmLancamento, lancamentoMes.nmLancamento) &&
         Objects.equals(this.diaVencimento, lancamentoMes.diaVencimento) &&
+        Objects.equals(this.mesVencimento, lancamentoMes.mesVencimento) &&
+        Objects.equals(this.anoVencimento, lancamentoMes.anoVencimento) &&
+        Objects.equals(this.dataPagamento, lancamentoMes.dataPagamento) &&
         Objects.equals(this.valorPlanejado, lancamentoMes.valorPlanejado) &&
         Objects.equals(this.valorEfetivo, lancamentoMes.valorEfetivo) &&
-        Objects.equals(this.status, lancamentoMes.status);
+        Objects.equals(this.statusLancamento, lancamentoMes.statusLancamento);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, nmLancamento, diaVencimento, valorPlanejado, valorEfetivo, status);
+    return Objects.hash(id, nmLancamento, diaVencimento, mesVencimento, anoVencimento, dataPagamento, valorPlanejado, valorEfetivo, statusLancamento);
   }
 
   @Override
@@ -214,9 +285,12 @@ public class LancamentoMes   {
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    nmLancamento: ").append(toIndentedString(nmLancamento)).append("\n");
     sb.append("    diaVencimento: ").append(toIndentedString(diaVencimento)).append("\n");
+    sb.append("    mesVencimento: ").append(toIndentedString(mesVencimento)).append("\n");
+    sb.append("    anoVencimento: ").append(toIndentedString(anoVencimento)).append("\n");
+    sb.append("    dataPagamento: ").append(toIndentedString(dataPagamento)).append("\n");
     sb.append("    valorPlanejado: ").append(toIndentedString(valorPlanejado)).append("\n");
     sb.append("    valorEfetivo: ").append(toIndentedString(valorEfetivo)).append("\n");
-    sb.append("    status: ").append(toIndentedString(status)).append("\n");
+    sb.append("    statusLancamento: ").append(toIndentedString(statusLancamento)).append("\n");
     sb.append("}");
     return sb.toString();
   }

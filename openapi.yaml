@@ -37,47 +37,44 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/LancamentoMes'
-  '/titulos/lancamento/{id}':
+  '/titulos/lancamentos/{tipo}':
     put:
       tags:
         - Titulos
       summary: Serviço para realizar lançamentos de despesas do mes
       operationId: putLancamentosTitulo
       parameters:
-        - name: id
+        - name: tipo
           in: path
           required: true
           schema:
-            type: string
-      responses:
-        '200':
-          description: Sucesso
-    delete:
-      tags:
-        - Titulos
-      summary: Serviço para realizar lançamentos de despesas do mes
-      operationId: deleteLancamentosTitulo
-      parameters:
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Sucesso
-  '/titulos/lancamento':
-    post:
-      tags:
-        - Titulos
-      summary: Serviço para realizar lançamentos de despesas do mes
-      operationId: postLancamentosTitulo
+            type: integer
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/LancamentoMes'
+      responses:
+        '200':
+          description: Sucesso
+  '/titulos/lancamentos/{tipo}/{id}':
+    delete:
+      tags:
+        - Titulos
+      summary: Serviço para realizar lançamentos de despesas do mes
+      operationId: deleteLancamentosTitulo
+      parameters:
+        - name: tipo
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           description: Sucesso
@@ -92,11 +89,18 @@ components:
           type: string
         diaVencimento:
           type: integer
+        mesVencimento:
+          type: integer
+        anoVencimento:
+          type: integer
+        dataPagamento:
+          type: string
+          format: date
         valorPlanejado:
           type: number
         valorEfetivo:
           type: number
-        status:
+        statusLancamento:
           type: string
           enum: 
             - PENDENTE

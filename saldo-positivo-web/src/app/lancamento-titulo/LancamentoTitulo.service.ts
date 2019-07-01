@@ -10,11 +10,7 @@ export class LancamentoTituloService {
 constructor(private http: HttpService) { }
 
   salvar(lancamento: LancamentoTitulo): Observable<any>{
-    if( lancamento.id ){
-      return this.http.put("/titulos/lancamento",lancamento.id,lancamento);
-    }else{
-      return this.http.post("/titulos/lancamento",lancamento);
-    }
+    return this.http.put("/titulos/lancamentos/1",lancamento);
   }
 
 }

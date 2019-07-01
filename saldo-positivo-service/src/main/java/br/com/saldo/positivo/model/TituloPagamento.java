@@ -7,19 +7,15 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class Titulo {
+public class TituloPagamento {
 	@Id
 	private String id;
 	private String descricao;
-	private TipoTituloEnum tipo;
 	private StatusTituloEnum status;
 	private BigDecimal valorPago;
 	private BigDecimal valorTitulo;
 	private LocalDate dataLiquidacao;
 	private LocalDate dataVencimento;
-	private Integer numParcela;
-	private Integer numTotalParcela;
-	private String tituloRef;
 	private Integer ano;
 	private Integer mes;
 
@@ -37,14 +33,6 @@ public class Titulo {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-
-	public TipoTituloEnum getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(TipoTituloEnum tipo) {
-		this.tipo = tipo;
 	}
 
 	public StatusTituloEnum getStatus() {
@@ -85,30 +73,6 @@ public class Titulo {
 
 	public void setDataVencimento(LocalDate dataVencimento) {
 		this.dataVencimento = dataVencimento;
-	}
-
-	public Integer getNumParcela() {
-		return numParcela;
-	}
-
-	public void setNumParcela(Integer numParcela) {
-		this.numParcela = numParcela;
-	}
-
-	public Integer getNumTotalParcela() {
-		return numTotalParcela;
-	}
-
-	public void setNumTotalParcela(Integer numTotalParcela) {
-		this.numTotalParcela = numTotalParcela;
-	}
-
-	public String getTituloRef() {
-		return tituloRef;
-	}
-
-	public void setTituloRef(String tituloRef) {
-		this.tituloRef = tituloRef;
 	}
 
 	public Integer getAno() {

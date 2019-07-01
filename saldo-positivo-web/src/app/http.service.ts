@@ -21,8 +21,8 @@ export class HttpService {
   post(service:string, body: any): Observable<any>{
     return this.http.post(environment.serviceApi+service,body,options);
   }
-  put(service:string,id: string,body: any): Observable<any>{
-    return this.http.put(environment.serviceApi+service+"/"+id, body,options);
+  put(service:string,body: any): Observable<any>{
+    return this.http.put(environment.serviceApi+service, body,options);
   }
   delete(service:string,id: string): Observable<any>{
     return this.http.get(environment.serviceApi+service+"/"+id);

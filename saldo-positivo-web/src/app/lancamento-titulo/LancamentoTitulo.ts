@@ -3,4 +3,7 @@ export class LancamentoTitulo {
     nmLancamento: string;
     valorPlanejado: string;
     valorEfetivo: string;
+    diaVencimento: number;
+    mesVencimento: number;
+    anoVencimento: number;
 }

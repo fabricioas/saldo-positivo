@@ -8,8 +8,8 @@ export class OrcamentoFamiliarService {
 
 constructor(private http: HttpService) { }
 
-  getTitulosRecebimento(mes: number, ano: number): Observable<any>{
-    return this.http.get("/titulos/lancamentos/1/1/1");
+  getTitulosRecebimento(ano: number,mes: number): Observable<any>{
+    return this.http.get(`/titulos/lancamentos/1/${ano}/${mes}`);
   }
   getTitulosGastosFixos(mes: number, ano: number): Observable<any>{
     return this.http.get("/titulos/lancamentos/2/1/1");

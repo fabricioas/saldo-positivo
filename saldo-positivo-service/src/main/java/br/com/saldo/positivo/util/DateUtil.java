@@ -20,4 +20,10 @@ public class DateUtil {
 		return data.getMonthValue();
 	}
 
+	public Integer getDay(LocalDate data) {
+		if( data == null ) {
+			return null;
+		}
+		return data.getDayOfMonth();
+	}
 }

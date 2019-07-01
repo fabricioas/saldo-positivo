@@ -10,11 +10,14 @@
         <mat-icon>add</mat-icon>        
       </button>
       <mat-menu #aboveMenu="matMenu" yPosition="above">
-        <button mat-menu-item (clickcd) = "openLancamentos()">Recebimento</button>
+        <button mat-menu-item (click) = "openLancamentos()">Recebimento</button>
         <button mat-menu-item>Pagamento</button>
       </mat-menu>
       <button mat-icon-button >
         <mat-icon>payment</mat-icon>        
+      </button>
+      <button mat-icon-button >
+        <mat-icon>edit</mat-icon>        
       </button>
       <button mat-icon-button >
         <mat-icon>delete_forever</mat-icon>        
@@ -37,7 +40,7 @@
           <tr style="height: 20px; background-color:gray; color: white">
             <th width=200 colspan="4">RECEBIMENTOS</th>
           </tr>
-          <tr *ngFor="let item of recebimentoDataSet ">
+          <tr *ngFor="let item of recebimentoDataSet " (click)="onSelect($event, item)">
             <td><input type="radio" name="lancamento" /></td>
             <td>{{item.nmLancamento}}</td>
             <td>{{item.valorPlanejado}}</td>

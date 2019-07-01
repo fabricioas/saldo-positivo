@@ -1,17 +1,19 @@
-<h1 mat-dialog-title>Lançamento</h1>
+<form [formGroup]="lancamentoGroup" (ngSubmit)="salvar()">
+  <h1 mat-dialog-title>Lançamento</h1>
   <div mat-dialog-content>
     <p>Recebimento</p>
     <mat-form-field style="width:300px">
-      <input matInput placeholder="Descrição" (ngModel)="data.nmLancamento">
+      <input matInput placeholder="Descrição" formControlName="nmLancamento">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Valor Planejado" (ngModel)="data.valorPlanejado">
+      <input matInput placeholder="Valor Planejado" formControlName="valorPlanejado">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Valor Efetivo" (ngModel)="data.valorEfetivo">
+      <input matInput placeholder="Valor Efetivo" formControlName="valorEfetivo">
     </mat-form-field>
   </div>
   <div mat-dialog-actions>
     <button mat-button [mat-dialog-close]="false">Fechar</button>
-    <button mat-button (click)="salvar()" cdkFocusInitial>Salvar</button>
+    <button mat-button cdkFocusInitial>Salvar</button>
   </div>
+</form>
