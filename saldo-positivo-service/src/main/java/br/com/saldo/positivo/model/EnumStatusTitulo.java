@@ -1,6 +1,6 @@
 package br.com.saldo.positivo.model;
 
-public enum StatusTituloEnum {
+public enum EnumStatusTitulo {
 
 	PENDENTE,
 	PAGO

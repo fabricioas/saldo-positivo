@@ -7,11 +7,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class TituloPagamento {
+public class Titulo {
 	@Id
 	private String id;
 	private String descricao;
-	private StatusTituloEnum status;
+	private EnumCategoriaTitulo categoriaTitulo;
+	private EnumClasseTitulo classeTitulo;
+	private EnumStatusTitulo status;
 	private BigDecimal valorPago;
 	private BigDecimal valorTitulo;
 	private LocalDate dataLiquidacao;
@@ -26,6 +28,22 @@ public class TituloPagamento {
 	public void setId(String id) {
 		this.id = id;
 	}
+	
+	public EnumCategoriaTitulo getCategoriaTitulo() {
+		return categoriaTitulo;
+	}
+
+	public void setCategoriaTitulo(EnumCategoriaTitulo categoriaTitulo) {
+		this.categoriaTitulo = categoriaTitulo;
+	}
+
+	public EnumClasseTitulo getClasseTitulo() {
+		return classeTitulo;
+	}
+
+	public void setClasseTitulo(EnumClasseTitulo classeTitulo) {
+		this.classeTitulo = classeTitulo;
+	}
 
 	public String getDescricao() {
 		return descricao;
@@ -35,11 +53,11 @@ public class TituloPagamento {
 		this.descricao = descricao;
 	}
 
-	public StatusTituloEnum getStatus() {
+	public EnumStatusTitulo getStatus() {
 		return status;
 	}
 
-	public void setStatus(StatusTituloEnum status) {
+	public void setStatus(EnumStatusTitulo status) {
 		this.status = status;
 	}
 

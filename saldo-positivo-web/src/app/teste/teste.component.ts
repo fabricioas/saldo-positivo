@@ -13,7 +13,7 @@ export class TesteComponent implements OnInit {
   displayedColumns = ["diaVencimento","nmLancamento","valorPlanejado","valorPago"];
   constructor(private service : OrcamentoFamiliarService) {}
   ngOnInit() {
-    this.service.getTitulosRecebimento(1,2019).subscribe( result => {
+    this.service.getTitulos(1,2019).subscribe( result => {
       this.recebimentoDataSet = result;
     });    
   }

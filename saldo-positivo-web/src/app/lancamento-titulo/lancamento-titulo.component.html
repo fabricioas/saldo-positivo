@@ -1,9 +1,18 @@
 <form [formGroup]="lancamentoGroup" (ngSubmit)="salvar()">
   <h1 mat-dialog-title>Lançamento</h1>
   <div mat-dialog-content>
-    <p>Recebimento</p>
+    <p>{{descricaoCategoria}} - {{data.mesVencimento}}/{{data.anoVencimento}}</p>
+    <mat-form-field style="width:300px">
+      <mat-select matNativeControl placeholder="Tipo Lançamento" formControlName="classeLancamento">
+        <mat-option *ngFor="let item of tiposLancamentos" [value]="item.value">
+          {{item.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
     <mat-form-field style="width:300px">
       <input matInput placeholder="Descrição" formControlName="nmLancamento">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Dia Vencimento" formControlName="diaVencimento">
     </mat-form-field>
     <mat-form-field>
       <input matInput placeholder="Valor Planejado" formControlName="valorPlanejado">

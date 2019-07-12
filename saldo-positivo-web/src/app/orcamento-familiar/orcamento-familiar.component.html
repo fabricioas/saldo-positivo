@@ -1,26 +1,28 @@
 <mat-card>
   <mat-card-title>
     <span>
-      Lançamentos - {{mes}}/{{ano}}
+      Lançamentos - {{mesCurrent.mes}}/{{mesCurrent.ano}}
     </span>
     <mat-chip-list>
-      <mat-chip>Mês Anterior</mat-chip>
-      <mat-chip>Proximo Mês</mat-chip>
+      <button mat-button (click)="previewMes()">Mês Anterior</button>
+      <button mat-button (click)="mesAtual()">Mês Atual</button>
+      <button mat-button (click)="nextMes()">Proximo Mês</button>
       <button mat-icon-button [matMenuTriggerFor]="aboveMenu">
-        <mat-icon>add</mat-icon>        
+        <mat-icon>add</mat-icon>
       </button>
       <mat-menu #aboveMenu="matMenu" yPosition="above">
-        <button mat-menu-item (click) = "openLancamentos()">Recebimento</button>
-        <button mat-menu-item>Pagamento</button>
+        <button mat-menu-item (click)="openLancamentos(1)">Recebimento</button>
+        <button mat-menu-item (click)="openLancamentos(2)">Pagamento</button>
+        <button mat-menu-item (click)="openLancamentos(3)">Investimento</button>
       </mat-menu>
-      <button mat-icon-button >
-        <mat-icon>payment</mat-icon>        
+      <button mat-icon-button [disabled]="itemSelected == null" (click)="openPagamento()">
+        <mat-icon>payment</mat-icon>
       </button>
-      <button mat-icon-button >
-        <mat-icon>edit</mat-icon>        
+      <button mat-icon-button [disabled]="itemSelected == null" (click)="editLancamentos()">
+        <mat-icon>edit</mat-icon>
       </button>
-      <button mat-icon-button >
-        <mat-icon>delete_forever</mat-icon>        
+      <button mat-icon-button [disabled]="itemSelected == null" (click)="excluirLancamento()">
+        <mat-icon>delete_forever</mat-icon>
       </button>
 
     </mat-chip-list>
@@ -30,7 +32,7 @@
       <table class="lancamentos">
         <thead>
           <tr style="height: 30px; background-color: teal; color: white;">
-            <th>#</th>
+            <th width=50>Dia</th>
             <th width=400>Lançamento</th>
             <th width=100>Planejado</th>
             <th width=100>Efetivo</th>
@@ -40,8 +42,8 @@
           <tr style="height: 20px; background-color:gray; color: white">
             <th width=200 colspan="4">RECEBIMENTOS</th>
           </tr>
-          <tr *ngFor="let item of recebimentoDataSet " (click)="onSelect($event, item)">
-            <td><input type="radio" name="lancamento" /></td>
+          <tr *ngFor="let item of recebimentoDataSet " (click)="onSelect($event, item, 1)">
+            <td>{{item.diaVencimento}}</td>
             <td>{{item.nmLancamento}}</td>
             <td>{{item.valorPlanejado}}</td>
             <td>{{item.valorEfetivo}}</td>
@@ -49,8 +51,8 @@
           <tr>
             <th></th>
             <th>Total</th>
-            <th>{{getTotalPlanejado()}}</th>
-            <th>{{getTotalPago()}}</th>
+            <th>{{getTotalPlanejado(recebimentoDataSet)}}</th>
+            <th>{{getTotalPago(recebimentoDataSet)}}</th>
           </tr>
           <tr style="height: 20px; background-color:gray; color: white">
             <th width=200 colspan="4">PAGAMENTOS</th>
@@ -58,8 +60,8 @@
           <tr style="height: 20px; ">
             <th width=200 colspan="4">Gastos Fixos</th>
           </tr>
-          <tr *ngFor="let item of recebimentoDataSet">
-            <td><input type="radio" name="lancamento" /></td>
+          <tr *ngFor="let item of gastosFixosDataSet" (click)="onSelect($event, item, 2)">
+            <td>{{item.diaVencimento}}</td>
             <td>{{item.nmLancamento}}</td>
             <td>{{item.valorPlanejado}}</td>
             <td>{{item.valorEfetivo}}</td>
@@ -67,14 +69,14 @@
           <tr>
             <th></th>
             <th>Total</th>
-            <th>{{getTotalPlanejado()}}</th>
-            <th>{{getTotalPago()}}</th>
+            <th>{{getTotalPlanejado(gastosFixosDataSet)}}</th>
+            <th>{{getTotalPago(gastosFixosDataSet)}}</th>
           </tr>
           <tr style="height: 20px; ">
             <th width=200 colspan="4">Gastos Periódicos</th>
           </tr>
-          <tr *ngFor="let item of recebimentoDataSet">
-            <td><input type="radio" name="lancamento" /></td>
+          <tr *ngFor="let item of gastosPeriodicosDataSet" (click)="onSelect($event, item, 2)">
+            <td>{{item.diaVencimento}}</td>
             <td>{{item.nmLancamento}}</td>
             <td>{{item.valorPlanejado}}</td>
             <td>{{item.valorEfetivo}}</td>
@@ -82,32 +84,32 @@
           <tr>
             <th></th>
             <th>Total</th>
-            <th>{{getTotalPlanejado()}}</th>
-            <th>{{getTotalPago()}}</th>
+            <th>{{getTotalPlanejado(gastosPeriodicosDataSet)}}</th>
+            <th>{{getTotalPago(gastosPeriodicosDataSet)}}</th>
           </tr>
           <tr style="height: 20px; ">
-              <th width=200 colspan="4">Cartão de Crédito</th>
-            </tr>
-            <tr *ngFor="let item of recebimentoDataSet">
-              <td><input type="radio" name="lancamento" /></td>
-              <td>{{item.nmLancamento}}</td>
-              <td>{{item.valorPlanejado}}</td>
-              <td>{{item.valorEfetivo}}</td>
-            </tr>
-            <tr>
-              <th></th>
-              <th>Total</th>
-              <th>{{getTotalPlanejado()}}</th>
-              <th>{{getTotalPago()}}</th>
-            </tr>
-            <tr style="height: 20px; background-color:gray; color: white">
+            <th width=200 colspan="4">Cartão de Crédito</th>
+          </tr>
+          <tr *ngFor="let item of cartaoCreditoDataSet" (click)="onSelect($event, item, 2)">
+            <td>{{item.diaVencimento}}</td>
+            <td>{{item.nmLancamento}}</td>
+            <td>{{item.valorPlanejado}}</td>
+            <td>{{item.valorEfetivo}}</td>
+          </tr>
+          <tr>
+            <th></th>
+            <th>Total</th>
+            <th>{{getTotalPlanejado(cartaoCreditoDataSet)}}</th>
+            <th>{{getTotalPago(cartaoCreditoDataSet)}}</th>
+          </tr>
+          <tr style="height: 20px; background-color:gray; color: white">
             <th width=200 colspan="4">INVESTIMENTOS</th>
           </tr>
           <tr>
             <th width=200 colspan="4">Aportes</th>
           </tr>
-          <tr *ngFor="let item of recebimentoDataSet">
-            <td><input type="radio" name="lancamento" /></td>
+          <tr *ngFor="let item of aportesDataSet" (click)="onSelect($event, item, 3)">
+            <td>{{item.diaVencimento}}</td>
             <td>{{item.nmLancamento}}</td>
             <td>{{item.valorPlanejado}}</td>
             <td>{{item.valorEfetivo}}</td>
@@ -115,14 +117,14 @@
           <tr>
             <th></th>
             <th>Total</th>
-            <th>{{getTotalPlanejado()}}</th>
-            <th>{{getTotalPago()}}</th>
+            <th>{{getTotalPlanejado(aportesDataSet)}}</th>
+            <th>{{getTotalPago(aportesDataSet)}}</th>
           </tr>
           <tr>
             <th width=200 colspan="4">Resgates</th>
           </tr>
-          <tr *ngFor="let item of recebimentoDataSet">
-            <td><input type="radio" name="lancamento" /></td>
+          <tr *ngFor="let item of resgatesDataSet" (click)="onSelect($event, item, 3)">
+            <td>{{item.diaVencimento}}</td>
             <td>{{item.nmLancamento}}</td>
             <td>{{item.valorPlanejado}}</td>
             <td>{{item.valorEfetivo}}</td>
@@ -130,14 +132,14 @@
           <tr>
             <th></th>
             <th>Total</th>
-            <th>{{getTotalPlanejado()}}</th>
-            <th>{{getTotalPago()}}</th>
+            <th>{{getTotalPlanejado(resgatesDataSet)}}</th>
+            <th>{{getTotalPago(resgatesDataSet)}}</th>
           </tr>
           <tr>
             <th width=200 colspan="4">Desembolsos</th>
           </tr>
-          <tr *ngFor="let item of recebimentoDataSet">
-            <td><input type="radio" name="lancamento" /></td>
+          <tr *ngFor="let item of desembolsosDataSet" (click)="onSelect($event, item, 3)">
+            <td>{{item.diaVencimento}}</td>
             <td>{{item.nmLancamento}}</td>
             <td>{{item.valorPlanejado}}</td>
             <td>{{item.valorEfetivo}}</td>
@@ -145,8 +147,8 @@
           <tr>
             <th></th>
             <th>Total</th>
-            <th>{{getTotalPlanejado()}}</th>
-            <th>{{getTotalPago()}}</th>
+            <th>{{getTotalPlanejado(desembolsosDataSet)}}</th>
+            <th>{{getTotalPago(desembolsosDataSet)}}</th>
           </tr>
         </tbody>
       </table>
@@ -160,16 +162,29 @@
         </tr>
         <tr>
           <th>Recebimento</th>
-          <th>1234</th>
+          <th>{{totais.recebimentos}}</th>
         </tr>
         <tr>
           <th>Pagamentos</th>
-          <th>1234</th>
+          <th>{{totais.pagamentos}}</th>
+        </tr>
+        <tr>
+          <th>
+            <p>Sobra</p>
+          </th>
+          <th>{{totais.recebimentos - totais.pagamentos}}</th>
         </tr>
         <tr>
           <th>Investimentos</th>
-          <th>1234</th>
+          <th>{{totais.investimentos}}</th>
         </tr>
+        <tr>
+          <th>
+            <p>Patrimonio</p>
+          </th>
+          <th>{{totais.recebimentos + totais.investimentos - totais.pagamentos}}</th>
+        </tr>
+
       </table>
     </div>
   </mat-card-content>

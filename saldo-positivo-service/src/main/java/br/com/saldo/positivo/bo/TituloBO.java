@@ -8,9 +8,10 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import br.com.saldo.positivo.dao.TituloRecebientoDao;
-import br.com.saldo.positivo.model.StatusTituloEnum;
-import br.com.saldo.positivo.model.TituloRecebimento;
+import br.com.saldo.positivo.dao.TituloDao;
+import br.com.saldo.positivo.model.EnumClasseTitulo;
+import br.com.saldo.positivo.model.EnumStatusTitulo;
+import br.com.saldo.positivo.model.Titulo;
 import br.com.saldo.positivo.swagger.model.LancamentoMes;
 import br.com.saldo.positivo.swagger.model.LancamentoMes.StatusLancamentoEnum;
 import br.com.saldo.positivo.util.EnumUtil;
@@ -26,21 +27,18 @@ public class TituloBO {
 	private EnumUtil enumUtil;
 	
 	@Autowired
-	private TituloRecebientoDao tituloRecebientoDao;
+	private TituloDao tituloDao;
 	
-	public List<TituloRecebimento> buscaTitulosRecebimento(Integer mes, Integer ano){
-		return tituloRecebientoDao.findTituloByAnoAndMes(ano,mes);
-	}
-
-	public String enviaTituloRecebimento(LancamentoMes lancamento) {
-		TituloRecebimento titulo = null;
+	public String enviaTitulo(LancamentoMes lancamento) {
+		Titulo titulo = null;
 		if(lancamento.getId() == null) {
-			titulo = new TituloRecebimento();
+			titulo = new Titulo();
 			titulo.setId(generateUtil.uuid());
 		}else {
-			titulo = tituloRecebientoDao.findOne(lancamento.getId());
+			titulo = tituloDao.findOne(lancamento.getId());
 		}
 		titulo.setDescricao(lancamento.getNmLancamento());
+		titulo.setClasseTitulo(EnumClasseTitulo.of(lancamento.getClasseLancamento()));
 		titulo.setStatus(enumUtil.statusTitulo(lancamento.getStatusLancamento()));
 		titulo.setValorTitulo(lancamento.getValorPlanejado());
 		titulo.setDataVencimento(getDataVencimento(lancamento));
@@ -48,7 +46,7 @@ public class TituloBO {
 		titulo.setAno(lancamento.getAnoVencimento());
 		titulo.setValorPago(lancamento.getValorEfetivo());
 		titulo.setDataLiquidacao(lancamento.getDataPagamento());
-		tituloRecebientoDao.save(titulo);
+		tituloDao.save(titulo);
 		return titulo.getId();
 	}
 
@@ -56,27 +54,29 @@ public class TituloBO {
 		return LocalDate.of(lancamento.getAnoVencimento(), lancamento.getMesVencimento(), lancamento.getDiaVencimento());
 	}
 
-	public String liquidaTituloRecebimento(String id, BigDecimal valorPago, BigDecimal valorTitulo, LocalDate dataLiquidacao) {
-		TituloRecebimento titulo = tituloRecebientoDao.findOne(id);
+	public String liquidaTitulo(String id, BigDecimal valorPago, BigDecimal valorTitulo, LocalDate dataLiquidacao) {
+		Titulo titulo = tituloDao.findOne(id);
 		titulo.setDataLiquidacao(dataLiquidacao);
 		titulo.setValorPago(valorPago);
 		if (valorTitulo != null && BigDecimal.ZERO.compareTo(valorTitulo) != 0) {
 			titulo.setValorTitulo(valorPago);
 		}
-		titulo.setStatus(StatusTituloEnum.PAGO);
-		tituloRecebientoDao.save(titulo);
+		titulo.setStatus(EnumStatusTitulo.PAGO);
+		tituloDao.save(titulo);
 		return titulo.getId();
 	}
 
-	public String deleteTituloRecebimento(String id) {
-		tituloRecebientoDao.delete(id);
+	public String deleteTitulo(String id) {
+		tituloDao.delete(id);
 		return id;
 	}
 
-	public List<LancamentoMes> buscaTitulosMes(Integer ano, Integer mes) {
-		return tituloRecebientoDao.findTituloByAnoAndMes(ano, mes).stream().map( m -> {
+	public List<LancamentoMes> buscaTitulos(Integer ano, Integer mes) {
+		return tituloDao.findTituloByAnoAndMes(ano, mes).stream().map( m -> {
 			LancamentoMes result = new LancamentoMes();
 			result.setId(m.getId());
+			result.categoriaLancamento(enumUtil.getEnumValor(m.getCategoriaTitulo()));
+			result.classeLancamento(enumUtil.getEnumValor(m.getClasseTitulo()));
 			result.setAnoVencimento(m.getAno());
 			result.setMesVencimento(m.getMes());
 			result.setDiaVencimento(m.getDataVencimento().getDayOfMonth());

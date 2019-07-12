@@ -25,6 +25,6 @@ export class HttpService {
     return this.http.put(environment.serviceApi+service, body,options);
   }
   delete(service:string,id: string): Observable<any>{
-    return this.http.get(environment.serviceApi+service+"/"+id);
+    return this.http.delete(environment.serviceApi+service+"/"+id);
   }
 }

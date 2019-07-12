@@ -16,10 +16,16 @@ import javax.validation.constraints.*;
  * LancamentoMes
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-06-17T19:17:34.294-03:00[America/Sao_Paulo]")
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2019-07-11T10:58:41.180673-03:00[America/Sao_Paulo]")
 public class LancamentoMes   {
   @JsonProperty("id")
   private String id = null;
+
+  @JsonProperty("categoriaLancamento")
+  private Integer categoriaLancamento = null;
+
+  @JsonProperty("classeLancamento")
+  private Integer classeLancamento = null;
 
   @JsonProperty("nmLancamento")
   private String nmLancamento = null;
@@ -94,6 +100,44 @@ public class LancamentoMes   {
 
   public void setId(String id) {
     this.id = id;
+  }
+
+  public LancamentoMes categoriaLancamento(Integer categoriaLancamento) {
+    this.categoriaLancamento = categoriaLancamento;
+    return this;
+  }
+
+  /**
+   * Get categoriaLancamento
+   * @return categoriaLancamento
+  **/
+  @ApiModelProperty(value = "")
+
+  public Integer getCategoriaLancamento() {
+    return categoriaLancamento;
+  }
+
+  public void setCategoriaLancamento(Integer categoriaLancamento) {
+    this.categoriaLancamento = categoriaLancamento;
+  }
+
+  public LancamentoMes classeLancamento(Integer classeLancamento) {
+    this.classeLancamento = classeLancamento;
+    return this;
+  }
+
+  /**
+   * Get classeLancamento
+   * @return classeLancamento
+  **/
+  @ApiModelProperty(value = "")
+
+  public Integer getClasseLancamento() {
+    return classeLancamento;
+  }
+
+  public void setClasseLancamento(Integer classeLancamento) {
+    this.classeLancamento = classeLancamento;
   }
 
   public LancamentoMes nmLancamento(String nmLancamento) {
@@ -262,6 +306,8 @@ public class LancamentoMes   {
     }
     LancamentoMes lancamentoMes = (LancamentoMes) o;
     return Objects.equals(this.id, lancamentoMes.id) &&
+        Objects.equals(this.categoriaLancamento, lancamentoMes.categoriaLancamento) &&
+        Objects.equals(this.classeLancamento, lancamentoMes.classeLancamento) &&
         Objects.equals(this.nmLancamento, lancamentoMes.nmLancamento) &&
         Objects.equals(this.diaVencimento, lancamentoMes.diaVencimento) &&
         Objects.equals(this.mesVencimento, lancamentoMes.mesVencimento) &&
@@ -274,7 +320,7 @@ public class LancamentoMes   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, nmLancamento, diaVencimento, mesVencimento, anoVencimento, dataPagamento, valorPlanejado, valorEfetivo, statusLancamento);
+    return Objects.hash(id, categoriaLancamento, classeLancamento, nmLancamento, diaVencimento, mesVencimento, anoVencimento, dataPagamento, valorPlanejado, valorEfetivo, statusLancamento);
   }
 
   @Override
@@ -283,6 +329,8 @@ public class LancamentoMes   {
     sb.append("class LancamentoMes {\n");
     
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    categoriaLancamento: ").append(toIndentedString(categoriaLancamento)).append("\n");
+    sb.append("    classeLancamento: ").append(toIndentedString(classeLancamento)).append("\n");
     sb.append("    nmLancamento: ").append(toIndentedString(nmLancamento)).append("\n");
     sb.append("    diaVencimento: ").append(toIndentedString(diaVencimento)).append("\n");
     sb.append("    mesVencimento: ").append(toIndentedString(mesVencimento)).append("\n");

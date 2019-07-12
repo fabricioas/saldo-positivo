@@ -8,13 +8,12 @@ export class OrcamentoFamiliarService {
 
 constructor(private http: HttpService) { }
 
-  getTitulosRecebimento(ano: number,mes: number): Observable<any>{
-    return this.http.get(`/titulos/lancamentos/1/${ano}/${mes}`);
+  getTitulos(ano: number,mes: number): Observable<any>{
+    return this.http.get(`/titulos/lancamentos/${ano}/${mes}`);
   }
-  getTitulosGastosFixos(mes: number, ano: number): Observable<any>{
-    return this.http.get("/titulos/lancamentos/2/1/1");
+
+  excluir(id: string): Observable<any>{
+    return this.http.delete("/titulos/lancamentos/",id);
   }
-  getTitulosGastosPeriodicos(mes: number, ano: number): Observable<any>{
-    return this.http.get("/titulos/lancamentos/3/1/1");
-  }
+
 }

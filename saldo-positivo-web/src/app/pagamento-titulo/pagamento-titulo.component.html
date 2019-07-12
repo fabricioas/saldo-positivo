@@ -1,0 +1,20 @@
+<form [formGroup]="pagamentoGroup" (ngSubmit)="pagar()">
+  <h1 mat-dialog-title>Pagamento</h1>
+  <div mat-dialog-content>
+    <p>{{descricaoCategoria}}</p>
+    <p><span>Nome do Titulo: </span>{{nmLancamento}}</p>
+    <p><span>Valor do Titulo: </span> {{valorTitulo}}</p>
+    <mat-form-field>
+        <input matInput [matDatepicker]="dataPagamento" placeholder="Data Pagamento" formControlName="dataPagamento">
+        <mat-datepicker-toggle matSuffix [for]="dataPagamento"></mat-datepicker-toggle>
+        <mat-datepicker #dataPagamento></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Valor Pago" formControlName="valorPago">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="false">Fechar</button>
+    <button mat-button cdkFocusInitial>Salvar</button>
+  </div>
+</form>
